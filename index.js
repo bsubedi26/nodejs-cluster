@@ -1,5 +1,4 @@
 const app = require('express')();
-const http = require('http');
 const cluster = require('cluster');
 const os = require('os');
 
@@ -12,8 +11,7 @@ if (cluster.isMaster) {
     for (var i = 0; i < workers; i++) {
         cluster.fork();
     }
-
-    // cluster events
+    // cluster event listeners
     cluster.on('online', (worker) => {
         console.log('Worker ' + worker.process.pid + ' is online');
     })
